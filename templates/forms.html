@@ -1,0 +1,7 @@
+{% macro token() %}<input type="hidden" name="csrf" value="{{ csrf }}">{% endmacro %}
+{% macro field(k,value='',required=false,prefix='',label='',type='text',multi=false) %}
+<div class="field"><label for="{{prefix}}{{k}}">{{label or k.replace('_',' ').capitalize()}}{% if required %} <small>(required)</small>{% endif %}</label>
+{% if multi %}<textarea id="{{prefix}}{{k}}" name="{{k}}" rows="3" {% if required %}required{% endif %}>{{value}}</textarea>
+{% else %}<input id="{{prefix}}{{k}}" type="{{type}}" name="{{k}}" {% if type!='file' %}value="{{value}}"{% endif %} {% if required %}required{% endif %}>{% endif %}</div>
+{% endmacro %}
+{% macro program_form(p={}) %}{% for k in program_fields %}{{field(k,p.get(k,''),k=='name',label={'name':'Program name','policy_url':'Official policy URL','provenance':'Source provenance','notes':'Research notes'}.get(k,''),type='url' if k=='policy_url' else 'text',multi=k not in ('name','policy_url'))}}{% endfor %}{% endmacro %}

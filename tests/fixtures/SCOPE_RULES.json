@@ -1,0 +1,29 @@
+{
+  "acquired_at": "2026-01-01T00:00:00Z",
+  "ambiguities": [],
+  "id": "fixture-001",
+  "last_verified_at": null,
+  "name": "Archive Workshop",
+  "provenance": {
+    "source": "Local acceptance fixture"
+  },
+  "rules": [
+    {
+      "effect": "include",
+      "kind": "domain",
+      "raw": "Manual review of archive.example.invalid",
+      "value": "archive.example.invalid"
+    },
+    {
+      "effect": "exclude",
+      "kind": "domain",
+      "raw": "billing.example.invalid",
+      "value": "billing.example.invalid"
+    }
+  ],
+  "schema_version": "1.0",
+  "snapshot_id": "scope-001",
+  "source": null,
+  "url": "https://example.invalid/policy",
+  "verification": "manual"
+}

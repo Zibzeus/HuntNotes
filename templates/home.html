@@ -1,0 +1,5 @@
+{% extends 'base.html' %}{% from 'forms.html' import token,field,program_form with context %}
+{% block main %}<h1>Research programs</h1><div class="layout"><section class="panel"><h2>Program directory <span>{{programs|length}}</span></h2>
+{% for p in programs %}<article><a class="record" href="/p/{{p.id}}">{{p.name}}</a><p class="muted">{{p.policy_url or 'Manual program'}} · {{p.updated[:10]}}</p></article>{% else %}<p>Create your first program or import its metadata from BountyRadar.</p>{% endfor %}</section>
+<section><details class="panel" {% if not programs %}open{% endif %}><summary>Create a program</summary><form action="/programs" method="post">{{token()}}{{program_form()}}<button>Create program</button></form></details>
+<details class="panel"><summary>Import from BountyRadar</summary><form action="/programs" method="post" enctype="multipart/form-data">{{token()}}<input type="hidden" name="mode" value="import">{{field('file',required=true,prefix='meta-',label='PROGRAM_METADATA.json (v1)',type='file')}}<button>Import program</button></form></details></section></div>{% endblock %}
